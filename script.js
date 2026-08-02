@@ -572,6 +572,81 @@ function checkMultipleChoice(
 }
 
 // =================================
+// 回答結果表示
+// =================================
+
+function showAnswerResult(
+    correct,
+    question
+){
+
+
+    const feedback =
+        document.getElementById(
+            "feedbackArea"
+        );
+
+
+
+    if(correct){
+
+        feedback.textContent =
+            "⭕ 正解！";
+
+        feedback.style.color =
+            "green";
+
+    }
+    else{
+
+        feedback.textContent =
+            "❌ 不正解";
+
+        feedback.style.color =
+            "red";
+
+    }
+
+
+
+    document.getElementById(
+        "explanationArea"
+    ).textContent =
+        "正解: "
+        + question.ANSWER
+        + "\n\n"
+        + question.EXPLANATION;
+
+}
+
+
+
+
+
+// =================================
+// 回答後ボタン無効化
+// =================================
+
+function disableAnswerButtons(){
+
+    const buttons =
+        document.querySelectorAll(
+            "#answerArea button"
+        );
+
+
+    buttons.forEach(
+        button=>{
+
+            button.disabled = true;
+
+        }
+    );
+
+}
+
+
+// =================================
 // UI更新
 // =================================
 

@@ -837,10 +837,6 @@ const questionHandlers = {
 // （後で実装）
 // =================================
 
-function renderMultipleChoice(){}
-
-function checkMultipleChoice(){}
-
 
 
 function renderFillBlank(){}

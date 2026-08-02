@@ -478,6 +478,98 @@ function renderQuestion(){
 
 }
 
+// =================================
+// multiple_choice表示
+// =================================
+
+function renderMultipleChoice(question){
+
+    const area =
+        document.getElementById(
+            "answerArea"
+        );
+
+
+    area.innerHTML = "";
+
+
+
+    for(let i = 1; i <= 4; i++){
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.textContent =
+            question[`CHOICE${i}`];
+
+
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                checkMultipleChoice(
+                    question[`CHOICE${i}`],
+                    question
+                );
+
+            }
+        );
+
+
+
+        area.appendChild(button);
+
+    }
+
+}
+
+
+
+
+
+// =================================
+// multiple_choice採点
+// =================================
+
+function checkMultipleChoice(
+    answer,
+    question
+){
+
+
+    const isCorrect =
+        answer === question.ANSWER;
+
+
+
+    if(isCorrect){
+
+        state.correctCount++;
+
+    }
+
+
+
+    state.answeredCount++;
+
+
+
+    showAnswerResult(
+        isCorrect,
+        question
+    );
+
+
+
+    disableAnswerButtons();
+
+    updateUI();
+
+}
 
 // =================================
 // UI更新

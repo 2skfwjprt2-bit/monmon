@@ -180,8 +180,8 @@ function loadQuestions(){
         result.questions;
 
 
+    resetQuizResult();
 
-    resetQuizState();
 
 
 

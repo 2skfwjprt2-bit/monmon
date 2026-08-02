@@ -100,35 +100,307 @@ function setupEvents(){
 
 // =================================
 // 問題読み込み
-// （Step2で実装）
 // =================================
 
 function loadQuestions(){
 
-    console.log(
-        "問題読み込み予定"
+    const input =
+        document.getElementById(
+            "questionInput"
+        ).value.trim();
+
+
+    if(!input){
+
+        showError(
+            "問題データを入力してください"
+        );
+
+        return;
+
+    }
+
+
+    const result =
+        parseQuestions(input);
+
+
+
+    if(result.questions.length === 0){
+
+        showError(
+            "読み込める問題がありません"
+        );
+
+        return;
+
+    }
+
+
+
+    state.questions =
+        result.questions;
+
+
+    state.currentIndex = 0;
+
+    state.correctCount = 0;
+
+    state.answeredCount = 0;
+
+
+
+    updateUI();
+
+    renderQuestion();
+
+
+
+    alert(
+        `${state.questions.length}問読み込みました`
     );
 
 }
+
+
 
 
 
 // =================================
 // 問題解析
-// （Step2で実装）
 // =================================
 
 function parseQuestions(text){
 
-    console.log(
-        "問題解析予定"
+
+    const blocks =
+        text.split("END")
+            .map(
+                block => block.trim()
+            )
+            .filter(
+                block => block !== ""
+            );
+
+
+
+    const questions = [];
+
+    const errors = [];
+
+
+
+    blocks.forEach(
+        (block,index)=>{
+
+
+            const lines =
+                block.split("\n")
+                     .map(
+                        line=>line.trim()
+                     )
+                     .filter(
+                        line=>line
+                     );
+
+
+
+            const data = {};
+
+
+
+            lines.forEach(line=>{
+
+
+                const separator =
+                    line.indexOf(":");
+
+
+                if(separator === -1){
+
+                    return;
+
+                }
+
+
+
+                const key =
+                    line
+                    .substring(0,separator)
+                    .trim();
+
+
+                const value =
+                    line
+                    .substring(separator + 1)
+                    .trim();
+
+
+
+                data[key] = value;
+
+
+            });
+
+
+
+            const error =
+                validateQuestion(
+                    data,
+                    index + 1
+                );
+
+
+
+            if(error){
+
+                errors.push(error);
+
+            }
+            else{
+
+                questions.push(data);
+
+            }
+
+
+        }
     );
 
 
-    return [];
+
+    if(errors.length){
+
+        showError(
+            errors.join("\n")
+        );
+
+    }
+
+
+
+    return {
+
+        questions,
+        errors
+
+    };
 
 }
 
+
+
+
+// =================================
+// 問題データチェック
+// =================================
+
+function validateQuestion(
+    question,
+    number
+){
+
+
+    if(!question.TYPE){
+
+        return `${number}問目: TYPEがありません`;
+
+    }
+
+
+
+    if(!question.QUESTION){
+
+        return `${number}問目: QUESTIONがありません`;
+
+    }
+
+
+
+    if(!question.ANSWER){
+
+        return `${number}問目: ANSWERがありません`;
+
+    }
+
+
+
+    const allowedTypes = [
+
+        "multiple_choice",
+        "fill_blank",
+        "word_order",
+        "error_correction"
+
+    ];
+
+
+
+    if(
+        !allowedTypes.includes(
+            question.TYPE
+        )
+    ){
+
+        return `${number}問目: 未対応のTYPEです (${question.TYPE})`;
+
+    }
+
+
+
+    if(
+        question.TYPE === "multiple_choice"
+    ){
+
+        for(
+            let i = 1;
+            i <= 4;
+            i++
+        ){
+
+            if(
+                !question[`CHOICE${i}`]
+            ){
+
+                return `${number}問目: CHOICE${i}がありません`;
+
+            }
+
+        }
+
+    }
+
+
+
+    return null;
+
+}
+
+
+
+
+
+// =================================
+// エラー表示
+// =================================
+
+function showError(message){
+
+
+    const feedback =
+        document.getElementById(
+            "feedbackArea"
+        );
+
+
+    feedback.textContent =
+        message;
+
+
+    feedback.style.color =
+        "red";
+
+}
 
 
 // =================================

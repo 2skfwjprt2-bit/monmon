@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ドイツ語クイズ</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- ヘッダー -->
+    <header class="header">
+
+        <h1>
+            🇩🇪 ドイツ語クイズ
+        </h1>
+
+        <p>
+            Deutsch Quiz
+        </p>
+
+    </header>
+
+
+
+
+    <!-- 問題データ読み込み -->
+    <section class="card">
+
+        <h2>
+            問題データ
+        </h2>
+
+
+        <textarea
+            id="questionInput"
+            placeholder="問題データを貼り付けてください">
+        </textarea>
+
+
+        <button id="loadButton">
+            読み込む
+        </button>
+
+
+        <div class="status">
+
+            <p>
+                読込問題数：
+                <span id="questionCount">0</span>
+            </p>
+
+
+            <p id="errorMessage"></p>
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- 設定 -->
+    <section class="card">
+
+
+        <h2>
+            設定
+        </h2>
+
+
+        <label class="checkbox">
+
+            <input
+                type="checkbox"
+                id="randomMode">
+
+            ランダム出題
+
+        </label>
+
+
+    </section>
+
+
+
+
+
+
+    <!-- クイズエリア -->
+    <section class="card quiz-card">
+
+
+        <div class="question-header">
+
+
+            <span id="questionNumber">
+                0 / 0
+            </span>
+
+
+            <span id="questionLevel">
+                
+            </span>
+
+
+        </div>
+
+
+
+
+
+        <h2 id="questionText">
+            問題がここに表示されます
+        </h2>
+
+
+
+
+        <!-- 問題形式ごとの回答場所 -->
+
+        <div id="answerArea">
+
+        </div>
+
+
+
+
+
+        <!-- 採点結果 -->
+
+        <div
+            id="feedbackArea"
+            class="feedback">
+
+        </div>
+
+
+
+
+
+        <!-- 解説 -->
+
+        <div
+            id="explanationArea"
+            class="explanation">
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+
+
+    <!-- ナビゲーション -->
+
+    <div class="navigation">
+
+
+        <button id="previousButton">
+
+            ← 前へ
+
+        </button>
+
+
+
+        <button id="nextButton">
+
+            次へ →
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <!-- 成績 -->
+
+    <section class="card">
+
+
+        <h2>
+            成績
+        </h2>
+
+
+        <p>
+            正答数：
+            <span id="correctCount">
+                0
+            </span>
+        </p>
+
+
+        <p>
+            回答数：
+            <span id="answeredCount">
+                0
+            </span>
+        </p>
+
+
+
+        <p>
+            正答率：
+            <span id="accuracy">
+                0%
+            </span>
+        </p>
+
+
+
+
+        <button id="resultButton">
+
+            結果を見る
+
+        </button>
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+    <!-- 結果画面 -->
+
+    <section
+        id="resultArea"
+        class="card hidden">
+
+
+        <h2>
+            最終結果
+        </h2>
+
+
+        <p id="finalResult">
+
+        </p>
+
+
+
+    </section>
+
+
+
+
+</div>
+
+
+
+
+
+<!-- JavaScript -->
+
+<script src="js/state.js"></script>
+
+<script src="js/utils.js"></script>
+
+<script src="js/parser.js"></script>
+
+<script src="js/renderer.js"></script>
+
+<script src="js/checker.js"></script>
+
+<script src="js/navigation.js"></script>
+
+<script src="js/result.js"></script>
+
+<script src="js/ui.js"></script>
+
+<script src="js/app.js"></script>
+
+
+</body>
+
+</html>

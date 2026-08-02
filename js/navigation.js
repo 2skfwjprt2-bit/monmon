@@ -75,7 +75,7 @@ function previousQuestion(){
 
     }
 
-
+    resetAnswerArea();
 
     renderQuestion();
 
@@ -196,5 +196,19 @@ function updateQuestionInfo(){
     number.textContent =
 
         `${AppState.currentIndex + 1} / ${total}`;
+
+}
+
+function resetAnswerArea(){
+
+    document.getElementById(
+        "feedbackArea"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "explanationArea"
+    ).textContent = "";
+
 
 }

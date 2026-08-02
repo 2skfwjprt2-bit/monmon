@@ -407,14 +407,76 @@ function showError(message){
 // 出題表示
 // =================================
 
+
+// =================================
+// 問題表示
+// =================================
+
 function renderQuestion(){
 
-    console.log(
-        "問題表示予定"
-    );
+    const question =
+        state.questions[state.currentIndex];
+
+
+    if(!question){
+
+        return;
+
+    }
+
+
+
+    document.getElementById(
+        "questionText"
+    ).textContent =
+        question.QUESTION;
+
+
+
+    document.getElementById(
+        "questionLevel"
+    ).textContent =
+        question.LEVEL || "";
+
+
+
+    document.getElementById(
+        "feedbackArea"
+    ).textContent =
+        "";
+
+
+
+    document.getElementById(
+        "explanationArea"
+    ).textContent =
+        "";
+
+
+
+    const handler =
+        questionHandlers[
+            question.TYPE
+        ];
+
+
+
+    if(handler){
+
+        handler.render(
+            question
+        );
+
+    }
+    else{
+
+        showError(
+            "対応していない問題形式です"
+        );
+
+    }
 
 }
-
 
 
 // =================================

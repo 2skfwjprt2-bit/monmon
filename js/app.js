@@ -2,7 +2,8 @@
 // app.js
 // アプリ起動・制御
 // =================================
-
+alert("aaaa");
+console.log("aaaa");
 console.log("script.js 読み込み成功");
 
 

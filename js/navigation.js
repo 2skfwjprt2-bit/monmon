@@ -2,7 +2,8 @@
 // navigation.js
 // 問題移動処理
 // =================================
-
+alert("aaaa");
+console.log("aaaa");
 
 
 
